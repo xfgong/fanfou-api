@@ -204,7 +204,7 @@
 参数：
   * id (必须) - 用户 id
       示例： `http://api.fanfou.com/friendships/create.xml?id=fanfou`
-          或 http://api.fanfou.com/friendships/create/fanfou.xml`
+          或 `http://api.fanfou.com/friendships/create/fanfou.xml`
   * callback (可选) - JavaScript 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用
       示例： `http://api.fanfou.com/friendships/create.json?callback=getStatuses`
 
