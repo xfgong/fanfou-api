@@ -52,7 +52,7 @@
 路径： `http://api.fanfou.com/statuses/show.[json|xml]`
 
 参数：
-  * id (必须) - 消息的id。
+  * id (必需) - 消息的id。
       示例： `http://api.fanfou.com/statuses/show.xml?id=6IAZmgy1TzA`
           或 `http://api.fanfou.com/statuses/show/6IAZmgy1TzA.xml`
   * callback (可选) - `JavaScript` 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用
@@ -188,7 +188,7 @@
 路径： `http://api.fanfou.com/direct_messages/destroy.[json|xml]`
 
 参数：
-  * id (必须) - 私信的id。
+  * id (必需) - 私信的id。
       示例： `http://api.fanfou.com/direct_messages/destroy.xml?id=102`
           或 `http://api.fanfou.com/direct_messages/destroy/102.xml`
   * callback (可选) - `JavaScript` 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用
@@ -202,7 +202,7 @@
 路径： `http://api.fanfou.com/friendships/create.[json|xml]`
 
 参数：
-  * id (必须) - 用户 id
+  * id (必需) - 用户 id
       示例： `http://api.fanfou.com/friendships/create.xml?id=fanfou`
           或 `http://api.fanfou.com/friendships/create/fanfou.xml`
   * callback (可选) - `JavaScript` 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用
@@ -213,7 +213,7 @@
 路径： `http://api.fanfou.com/friendships/destroy.[json|xml]`
 
 参数：
-  * id (必须) - 用户 id
+  * id (必需) - 用户 id
       示例： `http://api.fanfou.com/friendships/destroy.xml?id=fanfou`
           或 `http://api.fanfou.com/friendships/destroy/fanfou.xml`
   * callback (可选) - `JavaScript` 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用
