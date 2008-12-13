@@ -6,21 +6,17 @@
 
 == 用户 id ==
 
-用户 id 在个人网址中，例如：http://fanfou.com/<strong>fanfou</strong> 粗体的部分即为用户 id。
+用户 id 在个人网址中，例如：http://fanfou.com/<font color="blue"><strong>fanfou</strong></font> 蓝色的部分即为用户 id。
 
 == 使用 API 的简单途径 ==
 
 如果你的系统中有 <a href="http://curl.haxx.se/">cURL</a>，就可以通过非常简单的方式使用这些API了。
 
-示例：
-  * 显示随便看看的消息
-    `curl http://api.fanfou.com/statuses/public_timeline.rss`
-  * 显示用户消息
-    `curl -u loginname:password http://api.fanfou.com/statuses/user_timeline.rss`
-  * 显示用户和好友的信息
-    `curl -u loginname:password http://api.fanfou.com/statuses/friends_timeline.rss`
-  * 发布消息
-    `curl -u loginname:password -d status="消息内容" http://api.fanfou.com/statuses/update.xml`
+*示例：*
+  * 显示随便看看的消息<br />|| <font color="gray">`curl http://api.fanfou.com/statuses/public_timeline.rss`</font> ||
+  * 显示用户消息<br />|| <font color="gray">`curl -u loginname:password http://api.fanfou.com/statuses/user_timeline.rss`</font> ||
+  * 显示用户和好友的信息<br />|| <font color="gray">`curl -u loginname:password http://api.fanfou.com/statuses/friends_timeline.rss`</font> ||
+  * 发布消息<br />|| <font color="gray">`curl -u loginname:password -d status="消息内容" http://api.fanfou.com/statuses/update.xml`</font> ||
 
 == 现有的 API 应用 ==
 
@@ -120,6 +116,7 @@
 == 删除消息 ==
 
 路径： `http://api.fanfou.com/statuses/destroy.[json|xml]`
+
 
 参数：
   * id (必需) - 消息的id。
