@@ -14,13 +14,13 @@
 
 示例：
   * 显示随便看看的消息
-    curl http://api.fanfou.com/statuses/public_timeline.rss
+    `curl http://api.fanfou.com/statuses/public_timeline.rss`
   * 显示用户消息
-    curl -u loginname:password http://api.fanfou.com/statuses/user_timeline.rss
+    `curl -u loginname:password http://api.fanfou.com/statuses/user_timeline.rss`
   * 显示用户和好友的信息
-    curl -u loginname:password http://api.fanfou.com/statuses/friends_timeline.rss
+    `curl -u loginname:password http://api.fanfou.com/statuses/friends_timeline.rss`
   * 发布消息
-    curl -u loginname:password -d status="消息内容" http://api.fanfou.com/statuses/update.xml
+    `curl -u loginname:password -d status="消息内容" http://api.fanfou.com/statuses/update.xml`
 
 == 现有的 API 应用 ==
 
