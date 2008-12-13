@@ -1,3 +1,36 @@
+= 概念 =
+
+== 用户验证 ==
+
+如需要验证用户，验证方式为 HTTP Basic 验证。
+
+== 用户 id ==
+
+用户 id 在个人网址中，例如：http://fanfou.com/<strong>fanfou</strong> 粗体的部分即为用户 id。
+
+== 使用 API 的简单途径 ==
+
+如果你的系统中有 <a href="http://curl.haxx.se/">cURL</a>，就可以通过非常简单的方式使用这些API了。
+
+示例：
+  * 显示随便看看的消息
+    curl http://api.fanfou.com/statuses/public_timeline.rss
+  * 显示用户消息
+    curl -u loginname:password http://api.fanfou.com/statuses/user_timeline.rss
+  * 显示用户和好友的信息
+    curl -u loginname:password http://api.fanfou.com/statuses/friends_timeline.rss
+  * 发布消息
+    curl -u loginname:password -d status="消息内容" http://api.fanfou.com/statuses/update.xml
+
+== 现有的 API 应用 ==
+
+<a href="http://del.icio.us/fanfou/API%E5%BA%94%E7%94%A8">API 应用</a> (随时更新)
+
+你有新奇好玩的 API 应用？请与我们联系，email 是 api@fanfou.com，信中写上插件的简介、名称以及网址。
+
+----
+----
+
 = 消息方法 =
 
 == 显示随便看看的消息 ==
@@ -220,9 +253,12 @@
       示例： `http://api.fanfou.com/friendships/destroy.json?callback=getStatuses`
 
 
+
 = 账号方法 =
 
+
 == 验证用户 ==
+
 
 检验用户名密码是否正确
 
