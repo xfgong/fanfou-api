@@ -1,13 +1,11 @@
 #labels Featured
-#饭否开放API文档
-
 = 饭否 API 文档 =
 
 == 概念 ==
 
 === 用户验证 ===
 
-如需要验证用户，验证方式为 HTTP Basic 验证。
+如需要验证用户，验证方式为 [http://en.wikipedia.org/wiki/Basic_access_authentication HTTP Basic] 验证。
 
 === 用户 id ===
 
@@ -15,7 +13,7 @@
 
 === 使用 API 的简单途径 ===
 
-如果你的系统中有 <a href="http://curl.haxx.se/">cURL</a>，就可以通过非常简单的方式使用这些API了。
+如果你的系统中有 [http://curl.haxx.se/ cURL]，就可以通过非常简单的方式使用这些API了。
 
 *示例：*
   * 显示随便看看的消息<br />|| <font color="gray">`curl http://api.fanfou.com/statuses/public_timeline.rss`</font> ||
