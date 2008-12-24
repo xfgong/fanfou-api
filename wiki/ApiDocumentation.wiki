@@ -1,17 +1,19 @@
+#summary 饭否 API 文档
 #labels Featured
-= 饭否 API 文档 =
 
-== 概念 ==
+<wiki:toc max_depth="2" />
 
-=== 用户验证 ===
+= 基本概念 =
+
+== 用户验证 ==
 
 如需要验证用户，验证方式为 [http://en.wikipedia.org/wiki/Basic_access_authentication HTTP Basic] 验证。
 
-=== 用户 id ===
+== 用户 id ==
 
 用户 id 在个人网址中，例如：`http://fanfou.com/`<font color="blue"><strong>fanfou</strong></font> 蓝色的部分即为用户 id。
 
-=== 使用 API 的简单途径 ===
+== 使用 API 的简单途径 ==
 
 如果你的系统中有 [http://curl.haxx.se/ cURL]，就可以通过非常简单的方式使用这些API了。
 
@@ -25,7 +27,7 @@
   * 发布消息
   `curl -u loginname:password -d status="消息内容" http://api.fanfou.com/statuses/update.xml`
 
-=== 现有的 API 应用 ===
+== 现有的 API 应用 ==
 
 <a href="http://del.icio.us/fanfou/API%E5%BA%94%E7%94%A8">API 应用</a> (随时更新)
 
@@ -33,11 +35,11 @@
 
 ----
 
-== API 方法说明 ==
+= API 方法说明 =
 
-=== 消息相关的方法 ===
+== 消息相关的方法 ==
 
-==== 显示随便看看的消息 ====
+=== 显示随便看看的消息 ===
 
 *路径：* `http://api.fanfou.com/statuses/public_timeline.[json|xml|rss]`
 
@@ -48,7 +50,7 @@
   示例： `http://api.fanfou.com/statuses/public_timeline.json?callback=getStatuses`
 
 
-==== 显示用户和好友的消息 ====
+=== 显示用户和好友的消息 ===
 
 *路径：* `http://api.fanfou.com/statuses/friends_timeline.[json|xml|rss]`
 
@@ -65,7 +67,7 @@
   示例： `http://api.fanfou.com/statuses/friends_timeline.json?callback=getStatuses`
 
 
-==== 显示用户的消息 ====
+=== 显示用户的消息 ===
 
 路径： `http://api.fanfou.com/statuses/user_timeline.[json|xml|rss]`
 
@@ -83,7 +85,7 @@
   示例： `http://api.fanfou.com/statuses/user_timeline.json?callback=getStatuses`
 
 
-==== 显示指定消息 ====
+=== 显示指定消息 ===
 
 路径： `http://api.fanfou.com/statuses/show/id.[json|xml|rss]`
 
@@ -96,7 +98,7 @@
 </wiki:comment>
 
 
-==== 显示发给当前用户的消息 ====
+=== 显示发给当前用户的消息 ===
 
 路径： `http://api.fanfou.com/statuses/replies.[json|xml|rss]`
 
@@ -113,7 +115,7 @@
 </wiki:comment>
 
 
-==== 发布消息 ====
+=== 发布消息 ===
 
 路径： `http://api.fanfou.com/statuses/update.[json|xml]`
 
@@ -129,7 +131,8 @@
 </wiki:comment>
 
 
-==== 删除消息 ====
+
+=== 删除消息 ===
 
 路径： `http://api.fanfou.com/statuses/destroy.[json|xml]`
 
@@ -144,9 +147,9 @@
 </wiki:comment>
 
 
-=== 用户相关的方法 ===
+== 用户相关的方法 ==
 
-==== 显示好友列表 ====
+=== 显示好友列表 ===
 
 路径： `http://api.fanfou.com/users/friends.[json|xml]`
 
@@ -161,7 +164,7 @@
   示例： `http://api.fanfou.com/users/friends.json?callback=getStatuses`
 </wiki:comment>
 
-==== 显示关注者列表 ====
+=== 显示关注者列表 ===
 
 路径： `http://api.fanfou.com/users/followers.[json|xml]`
 
@@ -177,7 +180,7 @@
 </wiki:comment>
 
 
-==== 显示用户详细信息 ====
+=== 显示用户详细信息 ===
 
 路径： `http://api.fanfou.com/users/show.[json|xml]`
 
@@ -190,9 +193,9 @@
   示例： `http://api.fanfou.com/users/show.json?callback=getStatuses`
 </wiki:comment>
 
-=== 私信相关的方法 ===
+== 私信相关的方法 ==
 
-==== 显示用户收到的私信 ====
+=== 显示用户收到的私信 ===
 
 路径： `http://api.fanfou.com/direct_messages.[json|xml|rss]`
 
@@ -208,7 +211,7 @@
   示例： `http://api.fanfou.com/direct_messages.json?callback=getStatuses`
 </wiki:comment>
 
-==== 显示用户发的私信 ====
+=== 显示用户发的私信 ===
 
 路径： `http://api.fanfou.com/direct_messages/sent.[json|xml]`
 
@@ -225,7 +228,7 @@
 </wiki:comment>
 
 
-==== 发送私信 ====
+=== 发送私信 ===
 
 路径： `http://api.fanfou.com/direct_messages/new.[json|xml]`
 
@@ -239,7 +242,7 @@
 </wiki:comment>
 
 
-==== 删除私信 ====
+=== 删除私信 ===
 
 路径： `http://api.fanfou.com/direct_messages/destroy.[json|xml]`
 
@@ -252,7 +255,7 @@
   示例： `http://api.fanfou.com/direct_messages/destroy.json?callback=getStatuses`
 </wiki:comment>
 
-=== 好友关系方法 ===
+== 好友关系方法 ==
 
 ==== 添加好友 ====
 
@@ -267,7 +270,7 @@
   示例： `http://api.fanfou.com/friendships/create.json?callback=getStatuses`
 </wiki:comment>
 
-==== 删除好友 ====
+=== 删除好友 ===
 
 路径： `http://api.fanfou.com/friendships/destroy.[json|xml]`
 
@@ -283,10 +286,10 @@
 </wiki:comment>
 
 
-=== 账号方法 ===
+== 账号方法 ==
 
 
-==== 验证用户 ====
+=== 验证用户 ===
 
 
 检验用户名密码是否正确
@@ -296,9 +299,9 @@
 参数：无
 
 
-=== 辅助方法 ===
+== 辅助方法 ==
 
-==== 测试 ====
+=== 测试API ===
 
 用指定格式返回一个 ok 值，返回的 HTTP code 为 200
 
@@ -306,6 +309,6 @@
 
 参数：无
 
-== 获取帮助 ==
+= 意见反馈 =
 
 请访问[http://groups.google.com/group/fanfou-api 饭否开发者论坛]
