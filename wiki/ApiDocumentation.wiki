@@ -33,7 +33,7 @@
 
 你的应用希望通过认证？请：
 
-  # 确保发新消息正确的传递了 source 参数
+  # 确保发新消息正确的传递了 source 参数（参考下面的 statuses update 方法）
   # 请到[http://groups.google.com/group/fanfou-api 饭否开发者论坛]发帖，注明应用的source参数、应用名称、网址及简介。我们的工作人员将及时处理。
 
 说明：
@@ -128,7 +128,7 @@
 
 参数：
   * status (必需) - 消息内容，使用 POST 方式提交
-  * source (可选) - 消息来源，使用 POST 方式提交，如果与饭否的数据库匹配，网页上将以此格式显示： _status_(消息内容) 通过 _source_ (对应的 API 应用名称，需通过饭否的验证)。
+  * source (可选) - 消息来源，使用 POST 方式提交，如果与饭否的数据库匹配，网页上将以此格式显示： _status_(消息内容) 通过 _source_对应的 API 应用名称（参考上面的 [http://code.google.com/p/fanfou-api/wiki/ApiDocumentation#API%E5%BA%94%E7%94%A8%E8%AE%A4%E8%AF%81 API应用认证] 相关说明)。
 <wiki:comment>
   * callback (可选 _deprecated_) - `JavaScript` 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用
   示例： `http://api.fanfou.com/statuses/update.json?callback=getStatuses` 
