@@ -241,6 +241,7 @@
 参数：
   * user (必需) - 收信人 id ，使用 POST 方式提交
   * text (必需) - 私信内容，使用 POST 方式提交
+  * in_reply_to_id （可选）- 表示回复某条私信
 <wiki:comment>
   * callback (可选) - `JavaScript` 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用
   示例： `http://api.fanfou.com/direct_messages/new.json?callback=getStatuses`
