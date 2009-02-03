@@ -51,6 +51,7 @@
 *参数：*
   * count (可选) - 消息数，范围 1-20，默认为 20。
   示例： `http://api.fanfou.com/statuses/public_timeline.rss?count=10`
+  * format (可选）<sup><font color="red">beta</font></sup> － 消息内容格式，当 format=html 时，返回消息的内容字段是进行@识别，网址识别等后台处理之后的html代码。
   * callback (可选) - `JavaScript` 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用
   示例： `http://api.fanfou.com/statuses/public_timeline.json?callback=getStatuses`
 
@@ -68,6 +69,7 @@
   示例： `http://api.fanfou.com/statuses/friends_timeline.xml?since_id=6IAZmgy1TzA`
   * page (可选) - 页码，从 1 开始
   示例： `http://api.fanfou.com/statuses/friends_timeline.json?page=3`
+  * format (可选）<sup><font color="red">beta</font></sup> － 消息内容格式，当 format=html 时，返回消息的内容字段是进行@识别，网址识别等后台处理之后的html代码。
   * callback (可选) - `JavaScript` 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用
   示例： `http://api.fanfou.com/statuses/friends_timeline.json?callback=getStatuses`
 
@@ -85,7 +87,8 @@
   * since_id (可选) - 仅返回比此 ID 大的消息。
   示例： `http://api.fanfou.com/statuses/user_timeline.xml?since_id=6IAZmgy1TzA1`
   * page (可选) - 页码，从 1 开始
-  示例： `http://api.fanfou.com/statuses/user_timeline.json?page=3`
+  示例： `http://api.fanfou.com/statuses/user_timeline.json?page=3
+  * format (可选）<sup><font color="red">beta</font></sup> － 消息内容格式，当 format=html 时，返回消息的内容字段是进行@识别，网址识别等后台处理之后的html代码。
   * callback (可选) - `JavaScript` 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用
   示例： `http://api.fanfou.com/statuses/user_timeline.json?callback=getStatuses`
 
@@ -114,6 +117,7 @@
  示例： `http://api.fanfou.com/statuses/replies.xml?since_id=6IAZmgy1TzA`
   * page (可选) - 页码，从 1 开始
  示例： `http://api.fanfou.com/statuses/replies.json?page=3`
+  * format (可选）<sup><font color="red">beta</font></sup> － 消息内容格式，当 format=html 时，返回消息的内容字段是进行@识别，网址识别等后台处理之后的html代码。
 <wiki:comment>
   * callback (可选 _deprecated_) - `JavaScript` 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用
  示例： `http://api.fanfou.com/statuses/replies.json?callback=getStatuses`
