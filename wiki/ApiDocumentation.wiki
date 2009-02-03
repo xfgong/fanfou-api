@@ -87,7 +87,7 @@
   * since_id (可选) - 仅返回比此 ID 大的消息。
   示例： `http://api.fanfou.com/statuses/user_timeline.xml?since_id=6IAZmgy1TzA1`
   * page (可选) - 页码，从 1 开始
-  示例： `http://api.fanfou.com/statuses/user_timeline.json?page=3
+  示例： `http://api.fanfou.com/statuses/user_timeline.json?page=3`
   * format (可选）<sup><font color="red">beta</font></sup> － 消息内容格式，当 format=html 时，返回消息的内容字段是进行@识别，网址识别等后台处理之后的html代码。
   * callback (可选) - `JavaScript` 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用
   示例： `http://api.fanfou.com/statuses/user_timeline.json?callback=getStatuses`
