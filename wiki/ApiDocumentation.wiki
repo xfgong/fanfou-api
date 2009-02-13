@@ -119,6 +119,7 @@
   示例： `http://api.fanfou.com/statuses/replies.json?page=3`
   * format (可选）<sup><font color="red">beta</font></sup> － 消息内容格式，当 format=html 时，返回消息的内容字段是进行@识别，网址识别等后台处理之后的html代码。
 
+
 <wiki:comment>
   * callback (可选 _deprecated_) - `JavaScript` 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用
   示例： `http://api.fanfou.com/statuses/replies.json?callback=getStatuses`
@@ -157,6 +158,16 @@
   示例： `http://api.fanfou.com/statuses/destroy.json?callback=getStatuses`
 </wiki:comment>
 
+== 搜索相关的方法 ==
+
+=== 公开搜索 ===
+路径：`http://api.fanfou.com/search/public_timeline.[json|xml]`
+
+参数：
+  * q（必须）- 检索串。
+  示例：`http://api.fanfou.com/search/public_timeline.json?q=fanfou`
+  或 `http://api.fanfou.com/search/public_timeline/%E9%A5%AD%E5%90%A6.xml`，这里 %E9%A5%AD%E5%90%A6 是饭否的UTF8编码。
+  
 
 == 用户相关的方法 ==
 
