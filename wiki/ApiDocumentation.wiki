@@ -158,7 +158,7 @@
   示例： `http://api.fanfou.com/statuses/destroy.json?callback=getStatuses`
 </wiki:comment>
 
-== 搜索相关的方法 ==
+== 搜索相关的方法<sup><font color="red">New!</font></sup> ==
 
 === 公开搜索 ===
 路径：`http://api.fanfou.com/search/public_timeline.[json|xml]`
@@ -297,8 +297,6 @@
 
 路径： `http://api.fanfou.com/friendships/destroy.[json|xml]`
 
-
-
 参数：
   * id (必需) - 用户 id
   示例： `http://api.fanfou.com/friendships/destroy.xml?id=fanfou`
@@ -308,6 +306,30 @@
   示例： `http://api.fanfou.com/friendships/destroy.json?callback=getStatuses`
 </wiki:comment>
 
+== 黑名单方法<sup><font color="red">New!</font></sup> ==
+
+=== 加入黑名单 ===
+
+路径： `http://api.fanfou.com/blocks/create.[json|xml]`
+
+方法：POST
+
+参数：
+ * id (必需) - 用户 id
+  示例： `http://api.fanfou.com/blocks/create.xml?id=fanfou`
+  或 `http://api.fanfou.com/blocks/create/fanfou.xml`
+
+
+=== 解除黑名单 ===
+
+路径： `http://api.fanfou.com/blocks/destroy.[json|xml]`
+
+方法：POST
+
+参数：
+  * id (必需) - 用户 id
+  示例： `http://api.fanfou.com/blocks/destroy.xml?id=fanfou`
+  或 `http://api.fanfou.com/blocks/destroy/fanfou.xml`
 
 == 账号方法 ==
 
