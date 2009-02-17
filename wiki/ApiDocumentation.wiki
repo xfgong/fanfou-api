@@ -315,7 +315,7 @@
 方法：POST
 
 参数：
- * id (必需) - 用户 id
+  * id (必需) - 用户 id
   示例： `http://api.fanfou.com/blocks/create.xml?id=fanfou`
   或 `http://api.fanfou.com/blocks/create/fanfou.xml`
 
