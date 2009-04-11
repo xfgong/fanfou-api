@@ -158,7 +158,21 @@
   示例： `http://api.fanfou.com/statuses/destroy.json?callback=getStatuses`
 </wiki:comment>
 
-== 搜索相关的方法<sup><font color="red">New!</font></sup> ==
+== 照片相关的方法<sup><font color="red">New!</font></sup> ==
+
+饭否上传API模拟HTML的file input上传照片，也就是 HTTP POST 时 Content-Type 设置为 multipart/form-data。参考RFC1867 http://www.ietf.org/rfc/rfc1867.txt
+
+路径：`http://api.fanfou.com/photos/upload.[json|xml]`
+
+方法：POST 
+
+参数：
+ * photo（必须）- 照片文件。和`<input type="file" name="photo" />`效果一样
+ * status（可选）- 照片描述
+ * source (可选）- 字符串；客户端标识。
+
+
+== 搜索相关的方法 ==
 
 === 公开搜索 ===
 路径：`http://api.fanfou.com/search/public_timeline.[json|xml]`
