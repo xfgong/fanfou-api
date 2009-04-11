@@ -162,6 +162,8 @@
 
 饭否上传API模拟HTML的file input上传照片，也就是 HTTP POST 时 Content-Type 设置为 multipart/form-data。参考RFC1867 http://www.ietf.org/rfc/rfc1867.txt
 
+=== 照片上传 ===
+
 路径：`http://api.fanfou.com/photos/upload.[json|xml]`
 
 方法：POST 
