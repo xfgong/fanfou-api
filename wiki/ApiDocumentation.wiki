@@ -343,7 +343,7 @@
 
 == 好友关系方法 ==
 
-==== 添加好友 ====
+=== 添加好友 ===
 
 路径： `http://api.fanfou.com/friendships/create.[json|xml]`
 
@@ -382,9 +382,9 @@
   * user_b (必需) - 第二个用户的id
   示例： `http://api.fanfou.com/friendships/exists.xml?user_a=fanfou&user_b=wanhuai`
 
-== 好友消息通知方法 ==
+== 好友消息通知方法<sup><font color="red">New!</font></sup> ==
 
-==== 打开通知 ====
+=== 打开通知 ===
 
 路径： `http://api.fanfou.com/notifications/follow.[json|xml]`
 
