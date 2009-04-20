@@ -347,6 +347,8 @@
 
 路径： `http://api.fanfou.com/friendships/create.[json|xml]`
 
+方法：POST
+
 参数：
   * id (必需) - 用户 id
   示例： `http://api.fanfou.com/friendships/create.xml?id=fanfou`
@@ -360,6 +362,8 @@
 
 路径： `http://api.fanfou.com/friendships/destroy.[json|xml]`
 
+方法：POST
+
 参数：
   * id (必需) - 用户 id
   示例： `http://api.fanfou.com/friendships/destroy.xml?id=fanfou`
@@ -367,6 +371,47 @@
 <wiki:comment>
   * callback (可选) - `JavaScript` 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用
   示例： `http://api.fanfou.com/friendships/destroy.json?callback=getStatuses`
+</wiki:comment>
+
+=== 判断好友关系是否存在<sup><font color="red">New!</font></sup> ===
+
+路径： `http://api.fanfou.com/friendships/exists.[json|xml]`
+
+参数：
+  * user_a (必需) - 第一个用户的id
+  * user_b (必需) - 第二个用户的id
+  示例： `http://api.fanfou.com/friendships/exists.xml?user_a=fanfou&user_b=wanhuai`
+
+== 好友消息通知方法 ==
+
+==== 打开通知 ====
+
+路径： `http://api.fanfou.com/notifications/follow.[json|xml]`
+
+方法：POST
+
+参数：
+  * id (必需) - 用户 id
+  示例： `http://api.fanfou.com/notifications/follow.xml?id=fanfou`
+  或 `http://api.fanfou.com/notifications/follow/fanfou.xml`
+<wiki:comment>
+  * callback (可选) - `JavaScript` 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用
+  示例： `http://api.fanfou.com/notifications/follow.json?callback=getStatuses`
+</wiki:comment>
+
+=== 关闭通知 ===
+
+路径： `http://api.fanfou.com/notifications/leave.[json|xml]`
+
+方法：POST
+
+参数：
+  * id (必需) - 用户 id
+  示例： `http://api.fanfou.com/notifications/leave.xml?id=fanfou`
+  或 `http://api.fanfou.com/notifications/leave/fanfou.xml`
+<wiki:comment>
+  * callback (可选) - `JavaScript` 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用
+  示例： `http://api.fanfou.com/notifications/leave.json?callback=getStatuses`
 </wiki:comment>
 
 == 黑名单方法<sup><font color="red">New!</font></sup> ==
