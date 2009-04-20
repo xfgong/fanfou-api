@@ -306,8 +306,8 @@
 
 参数：
   * id (可选) - 用户 id，没有此参数或用户设隐私时需验证用户。
-  示例： `http://api.fanfou.com/users/followers.xml?id=fanfou` 
-  或 `http://api.fanfou.com/users/followers/fanfou.xml`
+  示例： `http://api.fanfou.com/favorites/fanfou.rss` 
+  或 `http://api.fanfou.com/favorites/fanfou.xml`
   * count (可选) - 私信数，范围 1-20，默认为 20。
   示例： `http://api.fanfou.com/favorites.xml?count=10`
     * page (可选) - 页码，从 1 开始
