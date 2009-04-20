@@ -382,6 +382,24 @@
   * user_b (必需) - 第二个用户的id
   示例： `http://api.fanfou.com/friendships/exists.xml?user_a=fanfou&user_b=wanhuai`
 
+== 好友和关注者方法<sup><font color="red">New!</font></sup> ==
+
+=== 显示好友id列表 ===
+
+路径： `http://api.fanfou.com/friends/ids.[json|xml]`
+
+参数：
+  * id (可选) - 用户 id，没有此参数或用户设隐私时需验证用户。
+  示例： `http://api.fanfou.com/friends/ids/fanfou.xml`
+
+=== 显示关注者id列表 ===
+
+路径： `http://api.fanfou.com/followers/ids.[json|xml]`
+
+参数：
+  * id (可选) - 用户 id，没有此参数或用户设隐私时需验证用户。
+  示例： `http://api.fanfou.com/followers/ids/fanfou.xml`
+
 == 好友消息通知方法<sup><font color="red">New!</font></sup> ==
 
 === 打开通知 ===
