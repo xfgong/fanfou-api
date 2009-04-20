@@ -298,7 +298,7 @@
   示例： `http://api.fanfou.com/direct_messages/destroy.json?callback=getStatuses`
 </wiki:comment>
 
-== 收藏相关的方法 ==
+== 收藏相关的方法<sup><font color="red">New!</font></sup> ==
 
 === 显示用户的收藏列表 ===
 
