@@ -1,7 +1,7 @@
 #summary 饭否 API 文档
 #labels Featured
 
-<wiki:toc max_depth="2" />
+<wiki:toc max_depth="3" />
 
 = 基本概念 =
 
