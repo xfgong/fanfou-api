@@ -1,7 +1,7 @@
 #summary 饭否 API 文档
 #labels Featured
 
-<font size="18" color="red">api修改记录</font><br />
+<font size="12" color="red">api修改记录</font><br />
 <ul>
 <li>2009-05-20
 <ul>
