@@ -1,9 +1,11 @@
 #summary 饭否 API 文档
 #labels Featured
 
-api修改记录
-新增了热词的api
-消息相关的api接口的返回值中，增加了图片消息的图片url
+<font color="red">api修改记录</font><br />
+<ol>
+<li>新增了热词的api</li>
+<li>消息相关的api接口的返回值中，增加了图片消息的图片url</li>
+</ol>
 
 
 <wiki:toc max_depth="3" />
@@ -506,6 +508,7 @@ api修改记录
         <in_reply_to_user_id>
         <favorited>
         <in_reply_to_screen_name>
+        <photo_url>
         <user>
                 <id>
                 <name>
