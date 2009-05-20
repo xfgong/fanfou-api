@@ -183,9 +183,14 @@
   * q（必须）- 检索串。
   示例：`http://api.fanfou.com/search/public_timeline.json?q=fanfou`
   或 `http://api.fanfou.com/search/public_timeline/%E9%A5%AD%E5%90%A6.xml`，这里 %E9%A5%AD%E5%90%A6 是饭否的UTF8编码。
-  
 
-== 用户相关的方法 ==
+=== 热词<sup><font color="red">New!</font></sup> ===
+返回当前的饭否热词。
+
+路径：`http://api.fanfou.com/trends.json` 
+
+
+= 用户相关的方法 ==
 
 === 显示好友列表 ===
 
