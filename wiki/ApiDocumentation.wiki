@@ -1,6 +1,11 @@
 #summary 饭否 API 文档
 #labels Featured
 
+= api修改记录 =
+===新增了热词的api===
+===消息相关的api接口的返回值中，增加了图片消息的图片url===
+
+
 <wiki:toc max_depth="3" />
 
 = 基本概念 =
