@@ -1,15 +1,11 @@
 #summary 饭否 API 文档
 #labels Featured
 
-<font size="12" color="red">api修改记录</font><br />
-<ul>
-<li>2009-05-20
-<ul>
-<li>新增了热词的api</li>
-<li>消息相关的api接口的返回值中，增加了图片消息的图片url</li>
-</ul>
-</li>
-</ul>
+== API更新记录 ==
+
+2009-05-20
+ * 新增了热词的 API
+ * 消息相关的 API 接口的返回值中，增加了图片消息的图片 URL
 
 
 <wiki:toc max_depth="3" />
