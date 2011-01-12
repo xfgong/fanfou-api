@@ -2,6 +2,8 @@
 #labels Featured
 
 == API更新记录 ==
+2011-01-11
+ * 启用新的论坛，地址为 [http://www.v2ex.com/go/fanfou 饭否开发者论坛]。
 
 2009-06-20
  * 新增了保存搜索的 API
@@ -44,7 +46,7 @@
 你的应用希望通过认证？请：
 
   # 确保发新消息正确的传递了 source 参数（参考下面的 statuses update 方法）
-  # 请到[http://groups.google.com/group/fanfou-api 饭否开发者论坛]发帖，注明应用的source参数、应用名称、网址及简介。我们的工作人员将及时处理。
+  # 请到[http://www.v2ex.com/go/fanfou 饭否开发者论坛]发帖，注明应用的source参数、应用名称、网址及简介等参数，可以参考[http://www.v2ex.com/t/7056 如何“申请认证”]。我们的工作人员将及时处理。
 
 说明：
   * source参数请使用英文，source参数仅作为识别标志、不在网页上显示
