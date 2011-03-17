@@ -2,6 +2,9 @@
 #labels Featured
 
 == API更新记录 ==
+2011-03-17
+ * 添加了mentions API 文档，更新了"显示指定消息"的format字段内容。
+
 2011-01-11
  * 启用新的论坛，地址为 [http://www.v2ex.com/go/fanfou 饭否开发者论坛]。
 
@@ -116,6 +119,7 @@
 参数：
   * id (必需) - 消息的id。
   示例： `http://api.fanfou.com/statuses/show/6IAZmgy1TzA.xml`
+  * format (可选）<sup><font color="red">beta</font></sup> － 消息内容格式，当 format=html 时，返回消息的内容字段是进行@识别，网址识别等后台处理之后的html代码。
 <wiki:comment>
   * callback (可选 _deprecated_) - `JavaScript` 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用
   示例： `http://api.fanfou.com/statuses/show.json?callback=getStatuses`
@@ -142,6 +146,26 @@
   示例： `http://api.fanfou.com/statuses/replies.json?callback=getStatuses`
 </wiki:comment>
 
+
+=== 提及当前用户的消息 ===
+
+路径： `http://api.fanfou.com/statuses/mentions.[json|xml|rss]`
+
+参数：
+  * count (可选) - 消息数，范围 1-20，默认为 20。
+  示例： `http://api.fanfou.com/statuses/mentions.rss?count=10`
+  * since_id (可选) - 仅返回比此 ID 大的消息。
+  示例： `http://api.fanfou.com/statuses/mentions.xml?since_id=6IAZmgy1TzA`
+  * max_id (可选) - 仅返回 ID 小于等于此 ID 的消息。
+  示例： `http://api.fanfou.com/statuses/mentions.xml?max_id=6IAZmgy1TzA`
+  * page (可选) - 页码，从 1 开始
+  示例： `http://api.fanfou.com/statuses/mentions.json?page=3`
+  * format (可选）<sup><font color="red">beta</font></sup> － 消息内容格式，当 format=html 时，返回消息的内容字段是进行@识别，网址识别等后台处理之后的html代码。
+
+<wiki:comment>
+  * callback (可选 _deprecated_) - `JavaScript` 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用
+  示例： `http://api.fanfou.com/statuses/mentions.json?callback=getStatuses`
+</wiki:comment>
 
 === 发布消息 ===
 
