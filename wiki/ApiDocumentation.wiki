@@ -82,7 +82,7 @@
   示例： `http://api.fanfou.com/statuses/friends_timeline.rss?count=10`
   * since_id (可选) - 仅返回比此 ID 大的消息。
   示例： `http://api.fanfou.com/statuses/friends_timeline.xml?since_id=6IAZmgy1TzA`
-  * max_id (可选) - 仅返回 ID 小于等于此 ID 的消息。
+  * max_id (可选) - 仅返回 ID 小于此 ID 的消息。
   示例： `http://api.fanfou.com/statuses/friends_timeline.xml?max_id=6IAZmgy1TzA`
   * page (可选) - 页码，从 1 开始
   示例： `http://api.fanfou.com/statuses/friends_timeline.json?page=3`
@@ -103,7 +103,7 @@
   示例： `http://api.fanfou.com/statuses/user_timeline.rss?count=10`
   * since_id (可选) - 仅返回比此 ID 大的消息。
   示例： `http://api.fanfou.com/statuses/user_timeline.xml?since_id=6IAZmgy1TzA1`
-  * max_id (可选) - 仅返回 ID 小于等于此 ID 的消息。
+  * max_id (可选) - 仅返回 ID 小于此 ID 的消息。
   示例： `http://api.fanfou.com/statuses/user_timeline.xml?max_id=6IAZmgy1TzA`
   * page (可选) - 页码，从 1 开始
   示例： `http://api.fanfou.com/statuses/user_timeline.json?page=3`
@@ -135,7 +135,7 @@
   示例： `http://api.fanfou.com/statuses/replies.rss?count=10`
   * since_id (可选) - 仅返回比此 ID 大的消息。
   示例： `http://api.fanfou.com/statuses/replies.xml?since_id=6IAZmgy1TzA`
-  * max_id (可选) - 仅返回 ID 小于等于此 ID 的消息。
+  * max_id (可选) - 仅返回 ID 小于此 ID 的消息。
   示例： `http://api.fanfou.com/statuses/replies.xml?max_id=6IAZmgy1TzA`
   * page (可选) - 页码，从 1 开始
   示例： `http://api.fanfou.com/statuses/replies.json?page=3`
@@ -156,7 +156,7 @@
   示例： `http://api.fanfou.com/statuses/mentions.rss?count=10`
   * since_id (可选) - 仅返回比此 ID 大的消息。
   示例： `http://api.fanfou.com/statuses/mentions.xml?since_id=6IAZmgy1TzA`
-  * max_id (可选) - 仅返回 ID 小于等于此 ID 的消息。
+  * max_id (可选) - 仅返回 ID 小于此 ID 的消息。
   示例： `http://api.fanfou.com/statuses/mentions.xml?max_id=6IAZmgy1TzA`
   * page (可选) - 页码，从 1 开始
   示例： `http://api.fanfou.com/statuses/mentions.json?page=3`
@@ -298,7 +298,7 @@
   示例： `http://api.fanfou.com/direct_messages.xml?count=10`
   * since_id (可选) - 仅返回比此 ID 大的私信。
   示例： `http://api.fanfou.com/direct_messages.xml?since_id=12345`
-  * max_id (可选) - 仅返回 ID 小于等于此 ID 的私信。
+  * max_id (可选) - 仅返回 ID 小于此 ID 的私信。
   示例： `http://api.fanfou.com/direct_messages.xml?max_id=6IAZmgy1TzA`
   * page (可选) - 页码，从 1 开始
   示例： `http://api.fanfou.com/direct_messages.json?page=3`
@@ -316,7 +316,7 @@
   示例： `http://api.fanfou.com/direct_messages/sent.xml?count=10`
   * since_id (可选) - 仅返回比此 ID 大的私信。
   示例： `http://api.fanfou.com/direct_messages/sent.xml?since_id=12345`
-  * max_id (可选) - 仅返回 ID 小于等于此 ID 的私信。
+  * max_id (可选) - 仅返回 ID 小于此 ID 的私信。
   示例： `http://api.fanfou.com/direct_messages/sent.xml?max_id=6IAZmgy1TzA`
   * page (可选) - 页码，从 1 开始
   示例： `http://api.fanfou.com/direct_messages/sent.json?page=3`
