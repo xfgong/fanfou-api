@@ -22,7 +22,7 @@
 
 == 用户验证 ==
 
-如需要验证用户，验证方式为 [http://en.wikipedia.org/wiki/Basic_access_authentication HTTP Basic] 验证。
+如需要验证用户，验证方式为 [http://en.wikipedia.org/wiki/Basic_access_authentication HTTP Basic] 验证以及[FanfouOAuth OAuth验证]<sup><font color="red">beta</font></sup>。
 
 == 用户 id ==
 
