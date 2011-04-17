@@ -1,3 +1,4 @@
+#labels oauth,api,fanfou
 饭否API提供了OAuth作为用户验证的方法，目前处于*试验和测试*阶段。OAuth认证参照RFC 5849的要求。
 
 第三方开发者使用OAuth认证的过程如
@@ -7,9 +8,9 @@
 
 = 用户授权 =
  饭否提供三个URL用于OAuth的用户授权, 其调用顺序和参数请看[http://tools.ietf.org/html/rfc5849 RFC5849]
- * /oauth/request_token
- * /oauth/authenticate
- * /oauth/access_token
+ * http://fanfou.com/oauth/request_token
+ * http://fanfou.com/oauth/authenticate
+ * http://fanfou.com/oauth/access_token
 
 = API的OAuth认证 =
  当应用开发者获得用户授权之后，可以根据OAuth的规范传入参数使用API
