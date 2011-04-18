@@ -1,7 +1,7 @@
 #labels oauth,api,fanfou
 饭否API提供了OAuth作为用户验证的方法，目前处于*试验和测试*阶段。OAuth认证参照RFC 5849的要求。
 
-* 需要注意的是，OAuth主要是为了网站应用的验证,  手机版客户端应用和PC桌面应用（含adobe air）仍旧应该使用现在的Basic Auth验证过程，我们预计将推出XAuth验证过程，更适合客户端和桌面应用。*
+* 需要注意的是，OAuth主要是用于网站应用的验证,  手机版客户端应用和PC桌面应用（含adobe air）仍旧应该使用现在的Basic Auth，我们预计将推出XAuth验证过程，更适合客户端和桌面应用。*
 
 第三方开发者使用OAuth认证的过程如
 
