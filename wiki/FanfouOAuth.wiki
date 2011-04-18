@@ -4,7 +4,7 @@
 第三方开发者使用OAuth认证的过程如
 
 = 申请应用 =
- 开发者到 [http://www.v2ex.com/go/fanfou 饭否开发者论坛] 上申请应用，并声明需要OAuth验证方式, 饭否官方审核批准后向开发者发送cosumer_key和consumer_key_secret.
+ 开发者到 [http://www.v2ex.com/go/fanfou 饭否开发者论坛] 上申请应用，并声明需要OAuth验证方式, 饭否官方审核批准后向开发者的饭否账户通过私信发送cosumer_key和consumer_key_secret.
 
 = 用户授权 =
  饭否提供三个URL用于OAuth的用户授权, 其调用顺序和参数请看[http://tools.ietf.org/html/rfc5849 RFC5849]
