@@ -18,4 +18,4 @@
  当应用开发者获得用户授权之后，可以根据OAuth的规范传入参数使用API
  * 可以通过HTTP Header(Authentication: OAuth ....) 
  * GET的query string和HTTP POST的payload
- API除此之外同Basic Auth不一样的地方。
+ API除此之外同Basic Auth一致。
