@@ -4,7 +4,7 @@ xAuth是OAuth的简化版本，主要为了解决各种客户端的跳转难题�
 申请了OAuth的开发者，只要拥有合法的consumer_key和consumer_secret, 就天然可以使用xAuth验证，并无其他限制。但是不排除以后对滥用xAuth的应用实施措施的可能性，因为恶意的应用可能仍然会保留用户的登录名和密码。
 
 = XAuth 流程 =
-oAuth验证要使用三个URL, request_token, authorize以及access_token, xAuth验证则只保留最后一部，access_token. 只是额外增加了三个字段作为参数
+oAuth验证要使用三个URL, request_token, authorize以及access_token, xAuth验证则只保留最后一个，access_token. 只是额外增加了三个字段作为参数
  * x_auth_username: 用户名字段，可以传递饭否登录名以及登录邮件
  * x_auth_password: 密码字段，目前只支持明文方式
  * x_auth_mode: 标识字段，填入"client_auth" 即可
@@ -12,11 +12,15 @@ oAuth验证要使用三个URL, request_token, authorize以及access_token, xAuth
 需要注意的是，oauth_signature字段必须对以上三个x_auth字段一并校验签名。
 
 = 实例代码=
-以下实例使用python编写，需要先安装oauth库
+以下是一个xAuth客户端的简单实例, 使用python编写，需要先安装oauth库.
 
 {{{
 import sys, urllib, oauth
 from urllib2 import Request, urlopen
+
+consumer_key = '...'   # 应用key
+consumer_secret = '...'  # 应用secret
+access_token_url = 'http://fanfou.com/oauth/access_token'
 
 def request_to_header(request, realm=''):
     """Serialize as a header for an HTTPAuth request."""
@@ -27,10 +31,6 @@ def request_to_header(request, realm=''):
             if k.startswith('oauth_') or k.startswith('x_auth_'):
                 auth_header += ', %s="%s"' % (k, oauth.escape(str(v)))
     return {'Authorization': auth_header}
-   
-consumer_key = '...'   # 应用key
-consumer_secret = '...'  # 应用secret
-access_token_url = 'http://fanfou.com/oauth/access_token'
 
 # 从command line 参数获得用户名和密码
 username = sys.argv[1]
