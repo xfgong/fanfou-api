@@ -2,8 +2,15 @@
 #labels Featured
 
 == API更新记录 ==
+2011-06-11
+ * 添加了xAuth验证的文档
+
+2011-04-18
+ * 添加了OAuth验证的文档
+
 2011-03-17
- * 添加了mentions API 文档，更新了"显示指定消息"的format字段内容。
+ * 添加了mentions API 文档
+ * 更新了"显示指定消息"的format字段内容。
 
 2011-01-11
  * 启用新的论坛，地址为 [http://www.v2ex.com/go/fanfou 饭否开发者论坛]。
