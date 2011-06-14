@@ -2,6 +2,9 @@
 #labels Featured
 
 == API更新记录 ==
+2011-06-14
+ * friends/followers id 列表 API 更新。
+
 2011-06-11
  * 添加了xAuth验证的文档
 
@@ -458,6 +461,9 @@
 参数：
   * id (可选) - 用户 id，没有此参数或用户设隐私时需验证用户。
   示例： `http://api.fanfou.com/friends/ids/fanfou.xml`
+  * page （可选） - 指定显示第N页的ID列表。<sup><font color="red">New!</font></sup>
+  * count （可选） - 每次返回的ID数量，默认为2000；也可以指定小于2000的任意正整数值。需要同时指定page参数。 <sup><font color="red">New!</font></sup>
+
 
 === 显示关注者id列表 ===
 
@@ -466,6 +472,10 @@
 参数：
   * id (可选) - 用户 id，没有此参数或用户设隐私时需验证用户。
   示例： `http://api.fanfou.com/followers/ids/fanfou.xml`
+  * page （可选） - 指定显示第N页的ID列表。<sup><font color="red">New!</font></sup>
+  * count （可选） - 每次返回的ID数量，默认为2000；也可以指定小于2000的任意正整数值。 需要同时指定page参数。<sup><font color="red">New!</font></sup>
+
+
 
 == 好友消息通知方法<sup><font color="red">New!</font></sup> ==
 
