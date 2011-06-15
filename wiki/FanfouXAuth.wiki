@@ -15,12 +15,13 @@ oAuth验证要使用三个URL, request_token, authorize以及access_token, xAuth
 以下是一个xAuth客户端的简单实例, 使用python编写，需要先安装oauth库.
 
 {{{
-import sys, urllib, oauth
+import sys, urllib, oauth, re
 from urllib2 import Request, urlopen
 
 consumer_key = '...'   # 应用key
 consumer_secret = '...'  # 应用secret
 access_token_url = 'http://fanfou.com/oauth/access_token'
+verify_url = 'http://api.fanfou.com/account/verify_credentials.xml'
 
 def request_to_header(request, realm=''):
     """Serialize as a header for an HTTPAuth request."""
@@ -50,6 +51,19 @@ headers=request_to_header(request)
 
 resp = urlopen(Request(access_token_url, headers=headers))
 token = resp.read()
-print token
+print token  # 已经获得access_token
+
+m = re.match(r'oauth_token=(?P<key>[^&]+)&oauth_token_secret=(?P<secret>[^&]+)', token)
+if m:
+    oauth_token = oauth.OAuthToken(m.group('key'), m.group('secret'))
+    request = oauth.OAuthRequest.from_consumer_and_token(consumer,
+                                                     token=oauth_token,
+                                                     http_url=verify_url)
+    request.sign_request(signature_method, consumer, oauth_token)
+    headers=request_to_header(request)
+    print headers
+    resp = urlopen(Request(verify_url, headers=headers))
+    resp = resp.read()
+    print resp
 
 }}}
