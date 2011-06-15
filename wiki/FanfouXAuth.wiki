@@ -61,7 +61,6 @@ if m:
                                                      http_url=verify_url)
     request.sign_request(signature_method, consumer, oauth_token)
     headers=request_to_header(request)
-    print headers
     resp = urlopen(Request(verify_url, headers=headers))
     resp = resp.read()
     print resp
