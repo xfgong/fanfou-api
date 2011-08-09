@@ -188,6 +188,11 @@
   * in_reply_to_status_id (可选)- 如果是回复某一条消息，则在这里指明被回复的消息的ID。
   * source (可选) - 消息来源，使用 POST 方式提交，如果与饭否的数据库匹配，网页上将以此格式显示： _status_(消息内容) 通过 _source 对应的 API 应用名称_（参考上面的 [http://code.google.com/p/fanfou-api/wiki/ApiDocumentation#API%E5%BA%94%E7%94%A8%E8%AE%A4%E8%AF%81 API应用认证] 相关说明)。
   * location (可选) - 最多30个字符，表示发布消息的地点名称 或 一个半角逗号分隔的经纬度坐标。如：北京市海淀区 或者 39.9594049,116.298419。
+
+返回:
+  * 正常时返回200 OK和消息体。
+  * 对于非法source参数和发生异常行为的source, 为了使其少影响系统的性能，采用了延迟处理的方法，延迟程度将取决于系统负载。这时返回202 Accepted 以及空内容。
+  * 其他错误，符合标准的HTTP 协议.
 <wiki:comment>
   * callback (可选 _deprecated_) - `JavaScript` 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用
   示例： `http://api.fanfou.com/statuses/update.json?callback=getStatuses` 
