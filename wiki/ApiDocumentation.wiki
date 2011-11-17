@@ -2,11 +2,11 @@
 #labels Featured
 
 
-饭否新版API文档上线 [https://github.com/FanfouAPI/FanFouAPIDoc/wiki 饭否API开发文档]], 以后文档更新将到新的页面，此处停止更新。
+饭否新版API文档上线 [https://github.com/FanfouAPI/FanFouAPIDoc/wiki 饭否API开发文档], 以后文档更新将到新的页面，此处停止更新。
 
 == API更新记录 ==
 2011-11-17
- * 饭否新版API文档上线 [https://github.com/FanfouAPI/FanFouAPIDoc/wiki 饭否API开发文档]], 以后文档更新将到新的页面，此处停止更新。
+ * 饭否新版API文档上线 [https://github.com/FanfouAPI/FanFouAPIDoc/wiki 饭否API开发文档], 以后文档更新将到新的页面，此处停止更新。
 
 2011-06-14
  * friends/followers id 列表 API 更新。
