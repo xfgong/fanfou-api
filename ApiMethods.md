@@ -1,0 +1,235 @@
+# 概念 #
+
+## 用户验证 ##
+
+如需要验证用户，验证方式为 HTTP Basic 验证。
+
+## 用户 id ##
+
+用户 id 在个人网址中，例如：`http://fanfou.com/`<font color='blue'><strong>fanfou</strong></font> 蓝色的部分即为用户 id。
+
+## 使用 API 的简单途径 ##
+
+如果你的系统中有 <a href='http://curl.haxx.se/'>cURL</a>，就可以通过非常简单的方式使用这些API了。
+
+**示例：**
+  * 显示随便看看的消息<br />| <font color='gray'><code>curl http://api.fanfou.com/statuses/public_timeline.rss</code></font> |
+|:-----------------------------------------------------------------------------------------------|
+  * 显示用户消息<br />| <font color='gray'><code>curl -u loginname:password http://api.fanfou.com/statuses/user_timeline.rss</code></font> |
+  * 显示用户和好友的信息<br />| <font color='gray'><code>curl -u loginname:password http://api.fanfou.com/statuses/friends_timeline.rss</code></font> |
+  * 发布消息<br />| <font color='gray'><code>curl -u loginname:password -d status="消息内容" http://api.fanfou.com/statuses/update.xml</code></font> |
+
+## 现有的 API 应用 ##
+
+<a href='http://del.icio.us/fanfou/API%E5%BA%94%E7%94%A8'>API 应用</a> (随时更新)
+
+你有新奇好玩的 API 应用？请与我们联系，email 是 api@fanfou.com，信中写上插件的简介、名称以及网址。
+
+<br />
+
+# 消息方法 #
+
+## 显示随便看看的消息 ##
+
+**路径：** `http://api.fanfou.com/statuses/public_timeline.[json|xml|rss]`
+
+**参数：**
+  * count (可选) - 消息数，范围 1-20，默认为 20。<br />| <font color='gray'>示例： <code>http://api.fanfou.com/statuses/public_timeline.rss?count=10</code> </font> |
+|:--------------------------------------------------------------------------------------------------------------|
+  * callback (可选) - `JavaScript` 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用<br />| <font color='gray'>示例： <code>http://api.fanfou.com/statuses/public_timeline.json?callback=getStatuses</code></font> |
+
+
+## 显示用户和好友的消息 ##
+
+**路径：** `http://api.fanfou.com/statuses/friends_timeline.[json|xml|rss]`
+
+**参数：**
+  * id (可选) - 用户 id，没有此参数或用户设隐私时需验证用户。有此参数时返回的是此用户和好友的所有消息，没有此参数时返回的是当前用户的首页中的最新消息。<br />| <font color='gray'>示例： <code>http://api.fanfou.com/statuses/friends_timeline.rss?id=fanfou</code><br />或 <code>http://api.fanfou.com/statuses/friends_timeline/fanfou.rss</code></font> |
+|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+  * count (可选) - 消息数，范围 1-20，默认为 20。<br />| <font color='gray'>示例： <code>http://api.fanfou.com/statuses/friends_timeline.rss?count=10</code></font> |
+  * since\_id (可选) - 仅返回比此 ID 大的消息。<br />| <font color='gray'>示例： <code>http://api.fanfou.com/statuses/friends_timeline.xml?since_id=6IAZmgy1TzA</code></font> |
+  * page (可选) - 页码，从 1 开始<br />| <font color='gray'>示例： <code>http://api.fanfou.com/statuses/friends_timeline.json?page=3</code></font> |
+  * callback (可选) - `JavaScript` 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用<br />| <font color='gray'>示例： <code>http://api.fanfou.com/statuses/friends_timeline.json?callback=getStatuses</code></font> |
+
+
+## 显示用户的消息 ##
+
+路径： `http://api.fanfou.com/statuses/user_timeline.[json|xml|rss]`
+
+参数：
+  * id (可选) - 用户 id，没有此参数或用户设隐私时需验证用户。<br />| <font color='gray'>示例： <code>http://api.fanfou.com/statuses/user_timeline.rss?id=fanfou</code><br />或 <code>http://api.fanfou.com/statuses/user_timeline/fanfou.rss</code></font> |
+|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+  * count (可选) - 消息数，范围 1-20，默认为 20。<br />| <font color='gray'>示例： <code>http://api.fanfou.com/statuses/user_timeline.rss?count=10</code></font> |
+  * since\_id (可选) - 仅返回比此 ID 大的消息。<br />| <font color='gray'>示例： <code>http://api.fanfou.com/statuses/user_timeline.xml?since_id=6IAZmgy1TzA</code></font> |
+  * page (可选) - 页码，从 1 开始<br />| <font color='gray'>示例： <code>http://api.fanfou.com/statuses/user_timeline.json?page=3</code></font> |
+  * callback (可选) - `JavaScript` 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用<br />| <font color='gray'>示例： <code>http://api.fanfou.com/statuses/user_timeline.json?callback=getStatuses</code></font> |
+
+
+## 显示指定消息 ##
+
+路径： `http://api.fanfou.com/statuses/show.[json|xml]`
+
+参数：
+  * id (必需) - 消息的id。<br />| <font color='gray'>示例： <code>http://api.fanfou.com/statuses/show.xml?id=6IAZmgy1TzA</code><br />或 <code>http://api.fanfou.com/statuses/show/6IAZmgy1TzA.xml</code></font> |
+|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+  * callback (可选) - `JavaScript` 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用<br />| <font color='gray'>示例： <code>http://api.fanfou.com/statuses/show.json?callback=getStatuses</code></font> |
+
+
+## 发布消息 ##
+
+路径： `http://api.fanfou.com/statuses/update.[json|xml]`
+
+参数：
+  * status (必需) - 消息内容，使用 POST 方式提交
+  * source (可选) - 消息来源，使用 POST 方式提交，如果与饭否的数据库匹配，网页上将以此格式显示： _status_(消息内容) 通过 _source_ (对应的 API 应用名称，需通过饭否的验证)。
+  * callback (可选) - `JavaScript` 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用<br />| <font color='gray'>示例： <code>http://api.fanfou.com/statuses/update.json?callback=getStatuses</code><br />且 POST_DATA = "status=Hello"</font> |
+|:-----------------------------------------------------------------------------------------------------------------------------------------------------|
+
+
+## 显示发给当前用户的消息 ##
+
+路径： `http://api.fanfou.com/statuses/replies.[json|xml|rss]`
+
+参数：
+  * count (可选) - 消息数，范围 1-20，默认为 20。<br />| <font color='gray'>示例： <code>http://api.fanfou.com/statuses/replies.rss?count=10</code></font> |
+|:-----------------------------------------------------------------------------------------------------|
+  * since\_id (可选) - 仅返回比此 ID 大的消息。<br />| <font color='gray'>示例： <code>http://api.fanfou.com/statuses/replies.xml?since_id=6IAZmgy1TzA</code></font> |
+  * page (可选) - 页码，从 1 开始<br />| <font color='gray'>示例： <code>http://api.fanfou.com/statuses/replies.json?page=3</code></font> |
+  * callback (可选) - `JavaScript` 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用<br />| <font color='gray'>示例： <code>http://api.fanfou.com/statuses/replies.json?callback=getStatuses</code></font> |
+
+
+## 删除消息 ##
+
+路径： `http://api.fanfou.com/statuses/destroy.[json|xml]`
+
+参数：
+  * id (必需) - 消息的id。<br />| <font color='gray'>示例： <code>http://api.fanfou.com/statuses/destroy.xml?id=6IAZmgy1TzA</code><br />或 <code>http://api.fanfou.com/statuses/destroy/6IAZmgy1TzA.xml</code></font> |
+|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+  * callback (可选) - `JavaScript` 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用<br />| <font color='gray'>示例： <code>http://api.fanfou.com/statuses/destroy.json?callback=getStatuses</code></font> |
+
+
+# 用户方法 #
+
+## 显示好友列表 ##
+
+路径： `http://api.fanfou.com/users/friends.[json|xml]`
+
+参数：
+  * id (可选) - 用户 id，没有此参数或用户设隐私时需验证用户。<br />| <font color='gray'>示例： <code>http://api.fanfou.com/users/friends.xml?id=fanfou</code><br />或 <code>http://api.fanfou.com/users/friends/fanfou.xml</code></font> |
+|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+  * page (可选) - 页码，从 1 开始<br />| <font color='gray'>示例： <code>http://api.fanfou.com/users/friends.json?page=3</code></font> |
+  * callback (可选) - `JavaScript` 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用<br />| <font color='gray'>示例： <code>http://api.fanfou.com/users/friends.json?callback=getStatuses</code></font> |
+
+
+## 显示关注者列表 ##
+
+路径： `http://api.fanfou.com/users/followers.[json|xml]`
+
+参数：
+  * id (可选) - 用户 id，没有此参数或用户设隐私时需验证用户。<br />| <font color='gray'>示例： <code>http://api.fanfou.com/users/followers.xml?id=fanfou</code><br />或 <code>http://api.fanfou.com/users/followers/fanfou.xml</code></font> |
+|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+  * page (可选) - 页码，从 1 开始<br />| <font color='gray'>示例： <code>http://api.fanfou.com/users/followers.json?page=3</code></font> |
+  * callback (可选) - `JavaScript` 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用<br />| <font color='gray'>示例： <code>http://api.fanfou.com/users/followers.json?callback=getStatuses</code></font> |
+
+
+## 显示用户详细信息 ##
+
+路径： `http://api.fanfou.com/users/show.[json|xml]`
+
+参数：
+  * id (可选) - 用户 id，没有此参数或用户设隐私时需验证用户。没有此参数时为当前用户。<br />| <font color='gray'>示例： <code>http://api.fanfou.com/users/show.xml?id=fanfou</code><br />或 <code>http://api.fanfou.com/users/show/fanfou.xml</code></font> |
+|:------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+  * callback (可选) - `JavaScript` 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用<br />| <font color='gray'>示例： <code>http://api.fanfou.com/users/show.json?callback=getStatuses</code></font> |
+
+
+# 私信方法 #
+
+## 显示用户收到的私信 ##
+
+路径： `http://api.fanfou.com/direct_messages.[json|xml|rss]`
+
+参数：
+  * count (可选) - 私信数，范围 1-20，默认为 20。<br />| <font color='gray'>示例： <code>http://api.fanfou.com/direct_messages.xml?count=10</code></font> |
+|:----------------------------------------------------------------------------------------------------|
+  * since\_id (可选) - 仅返回比此 ID 大的私信。<br />| <font color='gray'>示例： <code>http://api.fanfou.com/direct_messages.xml?since_id=12345</code></font> |
+  * page (可选) - 页码，从 1 开始<br />| <font color='gray'>示例： <code>http://api.fanfou.com/direct_messages.json?page=3</code></font> |
+  * callback (可选) - `JavaScript` 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用<br />| <font color='gray'>示例： <code>http://api.fanfou.com/direct_messages.json?callback=getStatuses</code></font> |
+
+
+## 显示用户发的私信 ##
+
+路径： `http://api.fanfou.com/direct_messages/sent.[json|xml]`
+
+参数：
+  * count (可选) - 私信数，范围 1-20，默认为 20。<br />| <font color='gray'>示例： <code>http://api.fanfou.com/direct_messages/sent.xml?count=10</code></font> |
+|:---------------------------------------------------------------------------------------------------------|
+  * since\_id (可选) - 仅返回比此 ID 大的私信。<br />| <font color='gray'>示例： <code>http://api.fanfou.com/direct_messages/sent.xml?since_id=12345</code></font> |
+  * page (可选) - 页码，从 1 开始<br />| <font color='gray'>示例： <code>http://api.fanfou.com/direct_messages/sent.json?page=3</code></font> |
+  * callback (可选) - `JavaScript` 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用<br />| <font color='gray'>示例： <code>http://api.fanfou.com/direct_messages/sent.json?callback=getStatuses</code></font> |
+
+
+## 发送私信 ##
+
+路径： `http://api.fanfou.com/direct_messages/new.[json|xml]`
+
+参数：
+  * user (必需) - 收信人 id ，使用 POST 方式提交
+  * text (必需) - 私信内容，使用 POST 方式提交
+  * callback (可选) - `JavaScript` 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用<br />| <font color='gray'>示例： <code>http://api.fanfou.com/direct_messages/new.json?callback=getStatuses</code><br />且 POST_DATA = "user=fanfou&text=Hello"</font> |
+|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+
+## 删除私信 ##
+
+路径： `http://api.fanfou.com/direct_messages/destroy.[json|xml]`
+
+参数：
+  * id (必需) - 私信的id。<br />| <font color='gray'>示例： <code>http://api.fanfou.com/direct_messages/destroy.xml?id=102</code><br />或 <code>http://api.fanfou.com/direct_messages/destroy/102.xml</code></font> |
+|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+  * callback (可选) - `JavaScript` 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用<br />| <font color='gray'>示例： <code>http://api.fanfou.com/direct_messages/destroy.json?callback=getStatuses</code></font> |
+
+
+# 好友关系方法 #
+
+## 添加好友 ##
+
+路径： `http://api.fanfou.com/friendships/create.[json|xml]`
+
+参数：
+  * id (必需) - 用户 id<br />| <font color='gray'>示例： <code>http://api.fanfou.com/friendships/create.xml?id=fanfou</code><br />或 <code>http://api.fanfou.com/friendships/create/fanfou.xml</code></font> |
+|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+  * callback (可选) - `JavaScript` 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用<br />| <font color='gray'>示例： <code>http://api.fanfou.com/friendships/create.json?callback=getStatuses</code></font> |
+
+## 删除好友 ##
+
+路径： `http://api.fanfou.com/friendships/destroy.[json|xml]`
+
+参数：
+  * id (必需) - 用户 id<br />| <font color='gray'>示例： <code>http://api.fanfou.com/friendships/destroy.xml?id=fanfou</code><br />或 <code>http://api.fanfou.com/friendships/destroy/fanfou.xml</code></font> |
+|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+  * callback (可选) - `JavaScript` 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用<br />| <font color='gray'>示例： <code>http://api.fanfou.com/friendships/destroy.json?callback=getStatuses</code></font> |
+
+
+
+# 账号方法 #
+
+
+## 验证用户 ##
+
+
+检验用户名密码是否正确
+
+路径： `http://api.fanfou.com/account/verify_credentials.[json|xml]`
+
+参数：无
+
+
+# 帮助方法 #
+
+## 测试 ##
+
+用指定格式返回一个 ok 值，返回的 HTTP code 为 200
+
+路径： `http://api.fanfou.com/help/test.[json|xml]`
+
+参数：无

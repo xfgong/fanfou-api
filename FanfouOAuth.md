@@ -1,0 +1,20 @@
+饭否API提供了OAuth作为用户验证的方法，目前处于**试验和测试**阶段。OAuth认证参照RFC 5849的要求。
+
+**需要注意的是，OAuth主要是用于网站应用的验证,  手机版客户端应用和PC桌面应用（含adobe air）仍旧应该使用现在的Basic Auth，我们预计将推出XAuth验证过程，更适合客户端和桌面应用。**
+
+第三方开发者使用OAuth认证的过程如
+
+# 申请应用 #
+> 开发者到 [饭否开发者论坛](http://www.v2ex.com/go/fanfou) 上申请应用，并声明需要OAuth验证方式，并给出callback URL, 饭否官方审核批准后向开发者的饭否账户通过私信发送consumer\_key和consumer\_key\_secret.
+
+# 用户授权 #
+> 饭否提供三个URL用于OAuth的用户授权, 其调用顺序和参数请看[RFC5849](http://tools.ietf.org/html/rfc5849)
+  * http://fanfou.com/oauth/request_token
+  * http://fanfou.com/oauth/authenticate
+  * http://fanfou.com/oauth/access_token
+
+# API的OAuth认证 #
+> 当应用开发者获得用户授权之后，可以根据OAuth的规范传入参数使用API
+  * 可以通过HTTP Header(Authentication: OAuth ....)
+  * GET的query string和HTTP POST的payload
+> API除此之外同Basic Auth一致。

@@ -1,0 +1,1191 @@
+饭否新版API文档上线 [饭否API开发文档](https://github.com/FanfouAPI/FanFouAPIDoc/wiki), 以后文档更新将到新的页面，此处停止更新。
+
+## API更新记录 ##
+2011-11-17
+  * 饭否新版API文档上线 [饭否API开发文档](https://github.com/FanfouAPI/FanFouAPIDoc/wiki), 以后文档更新将到新的页面，此处停止更新。
+
+2011-06-14
+  * friends/followers id 列表 API 更新。
+
+2011-06-11
+  * 添加了xAuth验证的文档
+
+2011-04-18
+  * 添加了OAuth验证的文档
+
+2011-03-17
+  * 添加了mentions API 文档
+  * 更新了"显示指定消息"的format字段内容。
+
+2011-01-11
+  * 启用新的论坛，地址为 [饭否开发者论坛](http://www.v2ex.com/go/fanfou)。
+
+2009-06-20
+  * 新增了保存搜索的 API
+  * 在私信、搜索和消息相关的方法中增加了对 max\_id 的支持
+
+2009-05-20
+  * 新增了热词的 API
+  * 消息相关的 API 接口的返回值中，增加了图片消息的图片 URL
+
+
+
+# 基本概念 #
+
+## 用户验证 ##
+
+如需要验证用户，验证方式为 [HTTP Basic](http://en.wikipedia.org/wiki/Basic_access_authentication) 验证,[OAuth验证](FanfouOAuth.md)<sup><font color='red'>beta</font></sup> 以及[xAuth验证](FanfouXAuth.md)<sup><font color='red'>beta</font></sup>。
+
+## 用户 id ##
+
+用户 id 在个人网址中，例如：`http://fanfou.com/`<font color='blue'><strong>fanfou</strong></font> 蓝色的部分即为用户 id。
+
+## 使用 API 的简单途径 ##
+
+如果你的系统中有 [cURL](http://curl.haxx.se/)，就可以通过非常简单的方式使用这些API了。
+
+**示例：**
+  * 显示随便看看的消息
+> `curl http://api.fanfou.com/statuses/public_timeline.rss`
+  * 显示用户消息
+> `curl -u loginname:password http://api.fanfou.com/statuses/user_timeline.rss`
+  * 显示用户和好友的信息
+> `curl -u loginname:password http://api.fanfou.com/statuses/friends_timeline.rss`
+  * 发布消息
+> `curl -u loginname:password -d status="消息内容" http://api.fanfou.com/statuses/update.xml`
+
+## API应用认证 ##
+
+通过认证的应用，在每条消息后会有 '通过 YOUR\_APP\_NAME' 的信息，YOUR\_APP\_NAME是你的应用名，并链接到应用的发布网址。
+
+你的应用希望通过认证？请：
+
+  1. 确保发新消息正确的传递了 source 参数（参考下面的 statuses update 方法）
+  1. 请到[饭否开发者论坛](http://www.v2ex.com/go/fanfou)发帖，注明应用的source参数、应用名称、网址及简介等参数，可以参考[如何“申请认证”](http://www.v2ex.com/t/7056)。我们的工作人员将及时处理。
+
+说明：
+  * source参数请使用英文，source参数仅作为识别标志、不在网页上显示
+  * 应用名称 将显示在网页上，也就是上文提到的YOUR\_APP\_NAME，建议使用中文
+
+# API 方法说明 #
+
+## 消息相关的方法 ##
+
+### 显示随便看看的消息 ###
+
+**路径：** `http://api.fanfou.com/statuses/public_timeline.[json|xml|rss]`
+
+**参数：**
+  * count (可选) - 消息数，范围 1-20，默认为 20。
+> 示例： `http://api.fanfou.com/statuses/public_timeline.rss?count=10`
+  * format (可选）<sup><font color='red'>beta</font></sup> － 消息内容格式，当 format=html 时，返回消息的内容字段是进行@识别，网址识别等后台处理之后的html代码。
+  * callback (可选) - `JavaScript` 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用
+> 示例： `http://api.fanfou.com/statuses/public_timeline.json?callback=getStatuses`
+
+
+### 显示用户和好友的消息 ###
+
+**路径：** `http://api.fanfou.com/statuses/friends_timeline.[json|xml|rss]`
+
+**参数：**
+  * id (可选，**注意：将来可能不再支持此参数**) - 用户 id，没有此参数或用户设隐私时需验证用户。有此参数时返回的是此用户和好友的所有消息，没有此参数时返回的是当前用户的首页中的最新消息。
+> 示例： `http://api.fanfou.com/statuses/friends_timeline.rss?id=fanfou`
+  * count (可选) - 消息数，范围 1-20，默认为 20。
+> 示例： `http://api.fanfou.com/statuses/friends_timeline.rss?count=10`
+  * since\_id (可选) - 仅返回比此 ID 大的消息。
+> 示例： `http://api.fanfou.com/statuses/friends_timeline.xml?since_id=6IAZmgy1TzA`
+  * max\_id (可选) - 仅返回 ID 小于此 ID 的消息。
+> 示例： `http://api.fanfou.com/statuses/friends_timeline.xml?max_id=6IAZmgy1TzA`
+  * page (可选) - 页码，从 1 开始
+> 示例： `http://api.fanfou.com/statuses/friends_timeline.json?page=3`
+  * format (可选）<sup><font color='red'>beta</font></sup> － 消息内容格式，当 format=html 时，返回消息的内容字段是进行@识别，网址识别等后台处理之后的html代码。
+  * callback (可选) - `JavaScript` 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用
+> 示例： `http://api.fanfou.com/statuses/friends_timeline.json?callback=getStatuses`
+
+
+### 显示用户的消息 ###
+
+路径： `http://api.fanfou.com/statuses/user_timeline.[json|xml|rss]`
+
+参数：
+  * id (可选) - 用户 id，没有此参数或用户设隐私时需验证用户。
+> 示例： `http://api.fanfou.com/statuses/user_timeline.rss?id=fanfou`
+> 或 `http://api.fanfou.com/statuses/user_timeline/fanfou.rss`
+  * count (可选) - 消息数，范围 1-20，默认为 20。
+> 示例： `http://api.fanfou.com/statuses/user_timeline.rss?count=10`
+  * since\_id (可选) - 仅返回比此 ID 大的消息。
+> 示例： `http://api.fanfou.com/statuses/user_timeline.xml?since_id=6IAZmgy1TzA1`
+  * max\_id (可选) - 仅返回 ID 小于此 ID 的消息。
+> 示例： `http://api.fanfou.com/statuses/user_timeline.xml?max_id=6IAZmgy1TzA`
+  * page (可选) - 页码，从 1 开始
+> 示例： `http://api.fanfou.com/statuses/user_timeline.json?page=3`
+  * format (可选）<sup><font color='red'>beta</font></sup> － 消息内容格式，当 format=html 时，返回消息的内容字段是进行@识别，网址识别等后台处理之后的html代码。
+  * callback (可选) - `JavaScript` 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用
+> 示例： `http://api.fanfou.com/statuses/user_timeline.json?callback=getStatuses`
+
+
+### 显示指定消息 ###
+
+路径： `http://api.fanfou.com/statuses/show/id.[json|xml|rss]`
+
+参数：
+  * id (必需) - 消息的id。
+> 示例： `http://api.fanfou.com/statuses/show/6IAZmgy1TzA.xml`
+  * format (可选）<sup><font color='red'>beta</font></sup> － 消息内容格式，当 format=html 时，返回消息的内容字段是进行@识别，网址识别等后台处理之后的html代码。
+<a href='Hidden comment: 
+* callback (可选 _deprecated_) - JavaScript 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用
+示例： http://api.fanfou.com/statuses/show.json?callback=getStatuses
+'></a>
+
+
+### 显示发给当前用户的消息 ###
+
+路径： `http://api.fanfou.com/statuses/replies.[json|xml|rss]`
+
+参数：
+  * count (可选) - 消息数，范围 1-20，默认为 20。
+> 示例： `http://api.fanfou.com/statuses/replies.rss?count=10`
+  * since\_id (可选) - 仅返回比此 ID 大的消息。
+> 示例： `http://api.fanfou.com/statuses/replies.xml?since_id=6IAZmgy1TzA`
+  * max\_id (可选) - 仅返回 ID 小于此 ID 的消息。
+> 示例： `http://api.fanfou.com/statuses/replies.xml?max_id=6IAZmgy1TzA`
+  * page (可选) - 页码，从 1 开始
+> 示例： `http://api.fanfou.com/statuses/replies.json?page=3`
+  * format (可选）<sup><font color='red'>beta</font></sup> － 消息内容格式，当 format=html 时，返回消息的内容字段是进行@识别，网址识别等后台处理之后的html代码。
+
+<a href='Hidden comment: 
+* callback (可选 _deprecated_) - JavaScript 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用
+示例： http://api.fanfou.com/statuses/replies.json?callback=getStatuses
+'></a>
+
+
+### 提及当前用户的消息 ###
+
+路径： `http://api.fanfou.com/statuses/mentions.[json|xml|rss]`
+
+参数：
+  * count (可选) - 消息数，范围 1-20，默认为 20。
+> 示例： `http://api.fanfou.com/statuses/mentions.rss?count=10`
+  * since\_id (可选) - 仅返回比此 ID 大的消息。
+> 示例： `http://api.fanfou.com/statuses/mentions.xml?since_id=6IAZmgy1TzA`
+  * max\_id (可选) - 仅返回 ID 小于此 ID 的消息。
+> 示例： `http://api.fanfou.com/statuses/mentions.xml?max_id=6IAZmgy1TzA`
+  * page (可选) - 页码，从 1 开始
+> 示例： `http://api.fanfou.com/statuses/mentions.json?page=3`
+  * format (可选）<sup><font color='red'>beta</font></sup> － 消息内容格式，当 format=html 时，返回消息的内容字段是进行@识别，网址识别等后台处理之后的html代码。
+
+<a href='Hidden comment: 
+* callback (可选 _deprecated_) - JavaScript 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用
+示例： http://api.fanfou.com/statuses/mentions.json?callback=getStatuses
+'></a>
+
+### 发布消息 ###
+
+路径： `http://api.fanfou.com/statuses/update.[json|xml]`
+
+方法：POST
+
+参数：
+  * status (必需) - 消息内容，使用 POST 方式提交
+  * in\_reply\_to\_status\_id (可选)- 如果是回复某一条消息，则在这里指明被回复的消息的ID。
+  * source (可选) - 消息来源，使用 POST 方式提交，如果与饭否的数据库匹配，网页上将以此格式显示： _status_(消息内容) 通过 _source 对应的 API 应用名称_（参考上面的 [API应用认证](http://code.google.com/p/fanfou-api/wiki/ApiDocumentation#API%E5%BA%94%E7%94%A8%E8%AE%A4%E8%AF%81) 相关说明)。
+  * location (可选) - 最多30个字符，表示发布消息的地点名称 或 一个半角逗号分隔的经纬度坐标。如：北京市海淀区 或者 39.9594049,116.298419。
+
+返回<sup><font color='red'>New!</font></sup>:
+  * 正常时返回200 OK和消息体。
+  * 对于非法source参数和发生异常行为的source, 为了使其少影响系统的性能，采用了延迟处理的方法，延迟程度将取决于系统负载。这时返回202 Accepted 以及空内容。
+  * 其他错误，符合标准的HTTP 协议.
+<a href='Hidden comment: 
+* callback (可选 _deprecated_) - JavaScript 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用
+示例： http://api.fanfou.com/statuses/update.json?callback=getStatuses
+且 POST_DATA = "status=Hello"
+'></a>
+
+### 转发消息 ###
+
+**转发** 实际上是发布一条新消息，使用的是发布消息接口，我们推荐的实现是：
+
+  * 新消息内容采用  "转：@用户名 原消息" 的格式
+  * 在POST内容中增加 "repost\_status\_id=原消息id"
+
+### 删除消息 ###
+
+路径： `http://api.fanfou.com/statuses/destroy.[json|xml]`
+
+方法：POST
+
+参数：
+  * id (必需) - 消息的id。
+> 示例： `http://api.fanfou.com/statuses/destroy/6IAZmgy1TzA.xml`
+<a href='Hidden comment: 
+* callback (可选 _deprecated_) - JavaScript 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用
+示例： http://api.fanfou.com/statuses/destroy.json?callback=getStatuses
+'></a>
+
+## 照片相关的方法<sup><font color='red'>New!</font></sup> ##
+
+饭否上传API模拟HTML的file input上传照片，也就是 HTTP POST 时 Content-Type 设置为 multipart/form-data。参考RFC1867 http://www.ietf.org/rfc/rfc1867.txt
+
+### 照片上传 ###
+
+路径：`http://api.fanfou.com/photos/upload.[json|xml]`
+
+方法：POST
+
+参数：
+  * photo（必须）- 照片文件。和`<input type="file" name="photo" />`效果一样
+  * status（可选）- 照片描述
+  * source (可选）- 字符串；客户端标识。
+  * location (可选) - 最多30个字符，表示发布消息的地点名称 或 一个半角逗号分隔的经纬度坐标。如：北京市海淀区 或者 39.9594049,116.298419。
+
+
+## 搜索相关的方法 ##
+
+### 公开搜索 ###
+路径：`http://api.fanfou.com/search/public_timeline.[json|xml]`
+
+参数：
+  * q（必须）- 检索串。
+> 示例：`http://api.fanfou.com/search/public_timeline.json?q=fanfou`
+> 或 `http://api.fanfou.com/search/public_timeline/%E9%A5%AD%E5%90%A6.xml`，这里 %E9%A5%AD%E5%90%A6 是饭否的UTF8编码。
+  * max\_id (可选) - 仅返回 ID 小于此 ID 的消息。
+> 示例： `http://api.fanfou.com/search/public_timeline/fanfou.xml?max_id=6IAZmgy1TzA`
+
+
+### 热词<sup><font color='red'>New!</font></sup> ###
+返回当前的饭否热词。
+
+路径：`http://api.fanfou.com/trends.json`
+
+
+# 用户相关的方法 #
+
+### 显示好友列表 ###
+
+路径： `http://api.fanfou.com/users/friends.[json|xml]`
+
+参数：
+  * id (可选) - 用户 id，没有此参数或用户设隐私时需验证用户。
+> 示例： `http://api.fanfou.com/users/friends.xml?id=fanfou`
+> 或 `http://api.fanfou.com/users/friends/fanfou.xml`
+  * page (可选) - 页码，从 1 开始
+> 示例： `http://api.fanfou.com/users/friends.json?page=3`
+<a href='Hidden comment: 
+* callback (可选) - JavaScript 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用
+示例： http://api.fanfou.com/users/friends.json?callback=getStatuses
+'></a>
+
+### 显示关注者列表 ###
+
+路径： `http://api.fanfou.com/users/followers.[json|xml]`
+
+参数：
+  * id (可选) - 用户 id，没有此参数或用户设隐私时需验证用户。
+> 示例： `http://api.fanfou.com/users/followers.xml?id=fanfou`
+> 或 `http://api.fanfou.com/users/followers/fanfou.xml`
+  * page (可选) - 页码，从 1 开始
+> 示例： `http://api.fanfou.com/users/followers.json?page=3`
+<a href='Hidden comment: 
+* callback (可选) - JavaScript 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用
+示例： http://api.fanfou.com/users/followers.json?callback=getStatuses
+'></a>
+
+
+### 显示用户详细信息 ###
+
+路径： `http://api.fanfou.com/users/show.[json|xml]`
+
+参数：
+  * id (可选) - 用户 id，没有此参数或用户设隐私时需验证用户。没有此参数时为当前用户。
+> 示例： `http://api.fanfou.com/users/show.xml?id=fanfou`
+> 或 `http://api.fanfou.com/users/show/fanfou.xml`
+<a href='Hidden comment: 
+* callback (可选) - JavaScript 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用
+示例： http://api.fanfou.com/users/show.json?callback=getStatuses
+'></a>
+
+## 私信相关的方法 ##
+
+### 显示用户收到的私信 ###
+
+路径： `http://api.fanfou.com/direct_messages.[json|xml|rss]`
+
+参数：
+  * count (可选) - 私信数，范围 1-20，默认为 20。
+> 示例： `http://api.fanfou.com/direct_messages.xml?count=10`
+  * since\_id (可选) - 仅返回比此 ID 大的私信。
+> 示例： `http://api.fanfou.com/direct_messages.xml?since_id=12345`
+  * max\_id (可选) - 仅返回 ID 小于此 ID 的私信。
+> 示例： `http://api.fanfou.com/direct_messages.xml?max_id=6IAZmgy1TzA`
+  * page (可选) - 页码，从 1 开始
+> 示例： `http://api.fanfou.com/direct_messages.json?page=3`
+<a href='Hidden comment: 
+* callback (可选) - JavaScript 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用
+示例： http://api.fanfou.com/direct_messages.json?callback=getStatuses
+'></a>
+
+### 显示用户发的私信 ###
+
+路径： `http://api.fanfou.com/direct_messages/sent.[json|xml]`
+
+参数：
+  * count (可选) - 私信数，范围 1-20，默认为 20。
+> 示例： `http://api.fanfou.com/direct_messages/sent.xml?count=10`
+  * since\_id (可选) - 仅返回比此 ID 大的私信。
+> 示例： `http://api.fanfou.com/direct_messages/sent.xml?since_id=12345`
+  * max\_id (可选) - 仅返回 ID 小于此 ID 的私信。
+> 示例： `http://api.fanfou.com/direct_messages/sent.xml?max_id=6IAZmgy1TzA`
+  * page (可选) - 页码，从 1 开始
+> 示例： `http://api.fanfou.com/direct_messages/sent.json?page=3`
+<a href='Hidden comment: 
+* callback (可选) - JavaScript 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用
+示例： http://api.fanfou.com/direct_messages/sent.json?callback=getStatuses
+'></a>
+
+
+### 发送私信 ###
+
+路径： `http://api.fanfou.com/direct_messages/new.[json|xml]`
+
+方法：POST
+
+参数：
+  * user (必需) - 收信人 id ，使用 POST 方式提交
+  * text (必需) - 私信内容，使用 POST 方式提交
+  * in\_reply\_to\_id （可选）- 表示回复某条私信
+<a href='Hidden comment: 
+* callback (可选) - JavaScript 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用
+示例： http://api.fanfou.com/direct_messages/new.json?callback=getStatuses
+且 POST_DATA = "user=fanfou&text=Hello"
+'></a>
+
+
+### 删除私信 ###
+
+路径： `http://api.fanfou.com/direct_messages/destroy.[json|xml]`
+
+方法：POST
+
+参数：
+  * id (必需) - 私信的id。
+> 示例： `http://api.fanfou.com/direct_messages/destroy.xml?id=102`
+> 或 `http://api.fanfou.com/direct_messages/destroy/102.xml`
+<a href='Hidden comment: 
+* callback (可选) - JavaScript 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用
+示例： http://api.fanfou.com/direct_messages/destroy.json?callback=getStatuses
+'></a>
+
+## 收藏相关的方法 ##
+
+### 显示用户的收藏列表 ###
+
+路径： `http://api.fanfou.com/favorites.[json|xml|rss]`
+
+参数：
+  * id (可选) - 用户 id，没有此参数或用户设隐私时需验证用户。
+> 示例： `http://api.fanfou.com/favorites/fanfou.rss`
+> 或 `http://api.fanfou.com/favorites/fanfou.xml`
+  * count (可选) - 私信数，范围 1-20，默认为 20。
+> 示例： `http://api.fanfou.com/favorites.xml?count=10`
+    * page (可选) - 页码，从 1 开始
+> 示例： `http://api.fanfou.com/favorites.json?page=3`
+<a href='Hidden comment: 
+* callback (可选) - JavaScript 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用
+示例： http://api.fanfou.com/favorites.json?callback=getStatuses
+'></a>
+
+### 收藏某条消息 ###
+
+路径： `http://api.fanfou.com/favorites/create/id.[json|xml]`
+
+方法：POST
+
+参数：
+  * id (必需) - 消息的id
+示例： `http://api.fanfou.com/favorites/create/VFL8jI1pl9c.json`
+> 或 `http://api.fanfou.com/favorites/create/VFL8jI1pl9c.xml`
+
+
+### 删除收藏 ###
+
+路径： `http://api.fanfou.com/favorites/destroy/id.[json|xml]`
+
+方法：POST
+
+参数：
+  * id (必需) - 消息的id。
+> 示例： `http://api.fanfou.com/favorites/destroy/VFL8jI1pl9c.json`
+> 或 `http://api.fanfou.com/favorites/destroy/VFL8jI1pl9c.xml`
+
+
+## 好友关系方法 ##
+
+### 添加好友 ###
+
+路径： `http://api.fanfou.com/friendships/create.[json|xml]`
+
+方法：POST
+
+参数：
+  * id (必需) - 用户 id
+> 示例： `http://api.fanfou.com/friendships/create.xml?id=fanfou`
+> 或 `http://api.fanfou.com/friendships/create/fanfou.xml`
+<a href='Hidden comment: 
+* callback (可选) - JavaScript 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用
+示例： http://api.fanfou.com/friendships/create.json?callback=getStatuses
+'></a>
+
+### 删除好友 ###
+
+路径： `http://api.fanfou.com/friendships/destroy.[json|xml]`
+
+方法：POST
+
+参数：
+  * id (必需) - 用户 id
+> 示例： `http://api.fanfou.com/friendships/destroy.xml?id=fanfou`
+> 或 `http://api.fanfou.com/friendships/destroy/fanfou.xml`
+<a href='Hidden comment: 
+* callback (可选) - JavaScript 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用
+示例： http://api.fanfou.com/friendships/destroy.json?callback=getStatuses
+'></a>
+
+### 判断好友关系是否存在<sup><font color='red'>New!</font></sup> ###
+
+路径： `http://api.fanfou.com/friendships/exists.[json|xml]`
+
+参数：
+  * user\_a (必需) - 第一个用户的id
+  * user\_b (必需) - 第二个用户的id
+> 示例： `http://api.fanfou.com/friendships/exists.xml?user_a=fanfou&user_b=wanhuai`
+
+## 好友和关注者方法<sup><font color='red'>New!</font></sup> ##
+
+### 显示好友id列表 ###
+
+路径： `http://api.fanfou.com/friends/ids.[json|xml]`
+
+参数：
+  * id (可选) - 用户 id，没有此参数或用户设隐私时需验证用户。
+> 示例： `http://api.fanfou.com/friends/ids/fanfou.xml`
+  * page （可选） - 指定显示第N页的ID列表。<sup><font color='red'>New!</font></sup>
+  * count （可选） - 每次返回的ID数量，默认为2000；也可以指定小于2000的任意正整数值。需要同时指定page参数。 <sup><font color='red'>New!</font></sup>
+
+
+### 显示关注者id列表 ###
+
+路径： `http://api.fanfou.com/followers/ids.[json|xml]`
+
+参数：
+  * id (可选) - 用户 id，没有此参数或用户设隐私时需验证用户。
+> 示例： `http://api.fanfou.com/followers/ids/fanfou.xml`
+  * page （可选） - 指定显示第N页的ID列表。<sup><font color='red'>New!</font></sup>
+  * count （可选） - 每次返回的ID数量，默认为2000；也可以指定小于2000的任意正整数值。 需要同时指定page参数。<sup><font color='red'>New!</font></sup>
+
+
+
+## 好友消息通知方法<sup><font color='red'>New!</font></sup> ##
+
+### 打开通知 ###
+
+路径： `http://api.fanfou.com/notifications/follow.[json|xml]`
+
+方法：POST
+
+参数：
+  * id (必需) - 用户 id
+> 示例： `http://api.fanfou.com/notifications/follow.xml?id=fanfou`
+> 或 `http://api.fanfou.com/notifications/follow/fanfou.xml`
+<a href='Hidden comment: 
+* callback (可选) - JavaScript 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用
+示例： http://api.fanfou.com/notifications/follow.json?callback=getStatuses
+'></a>
+
+### 关闭通知 ###
+
+路径： `http://api.fanfou.com/notifications/leave.[json|xml]`
+
+方法：POST
+
+参数：
+  * id (必需) - 用户 id
+> 示例： `http://api.fanfou.com/notifications/leave.xml?id=fanfou`
+> 或 `http://api.fanfou.com/notifications/leave/fanfou.xml`
+<a href='Hidden comment: 
+* callback (可选) - JavaScript 函数名，使用 JSON 格式时可用，将 JSON 对象作为参数直接调用
+示例： http://api.fanfou.com/notifications/leave.json?callback=getStatuses
+'></a>
+
+## 黑名单方法 ##
+
+### 加入黑名单 ###
+
+路径： `http://api.fanfou.com/blocks/create.[json|xml]`
+
+方法：POST
+
+参数：
+  * id (必需) - 用户 id
+> 示例： `http://api.fanfou.com/blocks/create.xml?id=fanfou`
+> 或 `http://api.fanfou.com/blocks/create/fanfou.xml`
+
+### 解除黑名单 ###
+
+路径： `http://api.fanfou.com/blocks/destroy.[json|xml]`
+
+方法：POST
+
+参数：
+  * id (必需) - 用户 id
+> 示例： `http://api.fanfou.com/blocks/destroy.xml?id=fanfou`
+> 或 `http://api.fanfou.com/blocks/destroy/fanfou.xml`
+
+## 账号方法 ##
+
+### 验证用户 ###
+
+检验用户名密码是否正确
+
+路径： `http://api.fanfou.com/account/verify_credentials.[json|xml]`
+
+参数：无
+
+
+## 保存搜索相关的方法<sup><font color='red'>New!</font></sup> ##
+
+### 显示登录用户的搜索保存列表 ###
+
+路径： `http://api.fanfou.com/saved_searches.[json|xml]`
+
+### 显示指定的搜索词 ###
+
+路径： `http://api.fanfou.com/saved_searches/show/id.[json|xml]`
+
+参数：
+  * id (必需) - 搜索词的id。
+> 示例： `http://api.fanfou.com/saved_searches/show/12345.xml`
+
+### 保存搜索词 ###
+
+路径： `http://api.fanfou.com/saved_searches/create.[json|xml]`
+
+方法：POST
+
+参数：
+  * query (必需) - 要保存的搜索词
+示例： curl -u user:password -d "query=fanfou" http://api.fanfou.com/saved_searches/create.xml
+
+### 删除搜索词 ###
+
+路径： `http://api.fanfou.com/saved_searches/destroy/id.[json|xml]`
+
+方法：POST
+
+参数：
+  * id (必需) - 消息的id。
+> 示例： `http://api.fanfou.com/saved_searches/destroy/12345.json`
+> 或 `http://api.fanfou.com/saved_searches/destroy/12345.xml`
+
+
+## 辅助方法 ##
+
+### 测试API ###
+
+用指定格式返回一个 ok 值，返回的 HTTP code 为 200
+
+路径： `http://api.fanfou.com/help/test.[json|xml]`
+
+参数：无
+
+## 返回的参数模块 ##
+
+### 消息模块 ###
+
+消息模块由消息的信息组成，其中用一个用户模块来描述消息的发起人
+
+
+
+&lt;status&gt;
+
+
+> 
+
+<created\_at>
+
+
+> 
+
+&lt;id&gt;
+
+
+> 
+
+&lt;text&gt;
+
+
+> 
+
+&lt;source&gt;
+
+
+> 
+
+&lt;truncated&gt;
+
+
+> 
+
+<in\_reply\_to\_status\_id>
+
+
+> 
+
+<in\_reply\_to\_user\_id>
+
+
+> 
+
+&lt;favorited&gt;
+
+
+> 
+
+<in\_reply\_to\_screen\_name>
+
+
+> 
+
+<photo\_url>
+
+
+> 
+
+&lt;user&gt;
+
+
+> > 
+
+&lt;id&gt;
+
+
+> > 
+
+&lt;name&gt;
+
+
+> > 
+
+<screen\_name>
+
+
+> > 
+
+&lt;location&gt;
+
+
+> > 
+
+&lt;description&gt;
+
+
+> > 
+
+<profile\_image\_url>
+
+
+> > 
+
+&lt;url&gt;
+
+
+> > 
+
+&lt;protected&gt;
+
+
+> > 
+
+<followers\_count>
+
+
+
+### 用户基本信息模块 ###
+
+用户基本信息模块由用户的基本信息组成，其中用一个消息模块来描述此用户最新的一条消息
+
+
+
+&lt;user&gt;
+
+
+
+> 
+
+&lt;id&gt;
+
+
+> 
+
+&lt;name&gt;
+
+
+> 
+
+<screen\_name>
+
+
+> 
+
+&lt;location&gt;
+
+
+> 
+
+&lt;description&gt;
+
+
+> 
+
+<profile\_image\_url>
+
+
+> 
+
+&lt;url&gt;
+
+
+> 
+
+&lt;protected&gt;
+
+
+> 
+
+<followers\_count>
+
+
+> 
+
+&lt;status&gt;
+
+
+> > 
+
+<created\_at>
+
+
+> > 
+
+&lt;id&gt;
+
+
+> > 
+
+&lt;text&gt;
+
+
+> > 
+
+&lt;source&gt;
+
+
+> > 
+
+&lt;truncated&gt;
+
+
+> > 
+
+<in\_reply\_to\_status\_id>
+
+
+> > 
+
+<in\_reply\_to\_user\_id>
+
+
+> > 
+
+&lt;favorited&gt;
+
+
+> > 
+
+<in\_reply\_to\_screen\_name>
+
+
+
+### 用户扩展信息模块 ###
+
+用户扩展信息模块，较详细的表示了用户的各项信息。(以后还会继续补充)
+
+
+
+&lt;user&gt;
+
+
+
+> 
+
+&lt;id&gt;
+
+
+> 
+
+&lt;name&gt;
+
+
+> 
+
+<screen\_name>
+
+
+> 
+
+&lt;location&gt;
+
+
+> 
+
+&lt;description&gt;
+
+
+> 
+
+<profile\_image\_url>
+
+
+> 
+
+&lt;url&gt;
+
+
+> 
+
+&lt;protected&gt;
+
+
+> 
+
+<friends\_count>
+
+
+> 
+
+<followers\_count>
+
+
+> 
+
+<favourites\_count>
+
+
+> 
+
+<statuses\_count>
+
+
+> 
+
+<created\_at>
+
+
+> 
+
+&lt;following&gt;
+
+
+> 
+
+&lt;notifications&gt;
+
+
+> 
+
+<utc\_offset>
+
+
+
+### 私信模块 ###
+
+私信模块由私信的各项属性组成，其中由sender模块表示发信人信息，recipient模块表示收信人信息
+
+
+
+<direct\_message>
+
+
+> 
+
+&lt;id&gt;
+
+
+> 
+
+&lt;text&gt;
+
+
+> 
+
+<sender\_id>
+
+
+> 
+
+<recipient\_id>
+
+
+> 
+
+<created\_at>
+
+
+> 
+
+<sender\_screen\_name>
+
+
+> 
+
+<recipient\_screen\_name>
+
+
+> 
+
+&lt;sender&gt;
+
+
+> > 
+
+&lt;id&gt;
+
+
+> > 
+
+&lt;name&gt;
+
+
+> > 
+
+<screen\_name>
+
+
+> > 
+
+&lt;location&gt;
+
+
+> > 
+
+&lt;description&gt;
+
+
+> > 
+
+<profile\_image\_url>
+
+
+> > 
+
+&lt;url&gt;
+
+
+> > 
+
+&lt;protected&gt;
+
+
+> > 
+
+<followers\_count>
+
+
+
+> 
+
+&lt;recipient&gt;
+
+
+> > 
+
+&lt;id&gt;
+
+
+> > 
+
+&lt;name&gt;
+
+
+> > 
+
+<screen\_name>
+
+
+> > 
+
+&lt;location&gt;
+
+
+> > 
+
+&lt;description&gt;
+
+
+> > 
+
+<profile\_image\_url>
+
+
+> > 
+
+&lt;url&gt;
+
+
+> > 
+
+&lt;protected&gt;
+
+
+> > 
+
+<followers\_count>
+
+
+
+## 返回的参数属性值 ##
+
+### created\_at ###
+
+描述: 元素的创建时间
+
+示例: Fri Apr 10 12:59:35 +0000 2009
+
+### description ###
+
+描述: 用户的自述
+
+示例: 默认值为空
+
+### favorited ###
+
+描述: 表示当前消息是否已被收藏
+
+示例: true, false
+
+### favorites\_count ###
+
+描述: 当前用户的收藏数
+
+示例: 0, 268
+
+### following ###
+
+描述: 表示被验证用户是否已经把当前用户加为好友了
+
+示例: true, false
+
+### followers\_count ###
+
+描述: 当前用户的被关注数
+
+示例: 0, 2013
+
+### friends\_count ###
+
+描述: 当前用户的好友数
+
+示例: 0, 801
+
+### name ###
+
+描述: 当前用户的昵称
+
+示例: 饭否, 郭万怀
+
+### id ###
+
+描述: 元素的独立id
+
+示例: 4L0aUggHfq8 (消息id), fanfou (用户id)
+
+### in\_reply\_to\_screen\_name ###
+
+描述: 消息所回复的用户昵称
+
+示例: (空值), 饭否
+
+### in\_reply\_to\_status\_id ###
+
+描述: 被回复的消息id
+
+示例: (空值), 4L0aUggHfq8
+
+### in\_reply\_to\_user\_id ###
+
+描述: 消息所回复的用户id
+
+示例: (空值), fanfou
+
+### location ###
+
+描述: 用户的所在地
+
+示例: 北京, 上海
+
+### notifications ###
+
+描述: 表示被验证的用户是否接收当前用户的消息通知
+
+示例: true, false
+
+### profile\_image\_url ###
+
+描述: 当前用户的头像地址
+
+示例: ![http://avatar.fanfou.com/l0/00/37/9g.jpg](http://avatar.fanfou.com/l0/00/37/9g.jpg)
+
+### protected ###
+
+描述: 表示当前用户是否设置了“需要我批准才能查看我的消息”
+
+示例: true, false
+
+### screen\_name ###
+
+描述: 当前用户的昵称
+
+示例: 饭否, 郭万怀
+
+### source ###
+
+描述: 消息的发布途径
+
+示例: 网页, 手机上网
+
+### statuses\_count ###
+
+描述: 当前用户的消息数
+
+示例: 0, 2068
+
+### text ###
+
+描述: 消息的内容
+
+示例: 饭否排行榜新增最新动态，可以看到刚刚给自己打过标签的人。
+
+### truncated ###
+
+描述: 表示当前消息是否需要截断
+
+示例: true, false
+
+### url ###
+
+描述: 用户个人信息中的网站地址
+
+示例: h​t​t​p​:​/​/​d​e​v​.​f​a​n​f​o​u​.​c​o​m
+
+# 意见反馈 #
+
+请访问[饭否开发者论坛](http://groups.google.com/group/fanfou-api)
